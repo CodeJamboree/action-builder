@@ -1,0 +1,89 @@
+{
+  "name": "@codejamboree/action-builder",
+  "version": "1.0.0",
+  "description": "Create redux actions",
+  "type": "module",
+  "main": "dist/commonjs/index.min.cjs",
+  "types": "dist/commonjs/types/index.d.min.ts",
+  "module": "dist/commonjs/index.min.cjs",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/types/index.d.min.mts",
+        "default": "./dist/esm/index.min.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/types/index.d.min.ts",
+        "default": "./dist/commonjs/index.min.cjs"
+      }
+    },
+    "./production": {
+      "import": {
+        "types": "./dist/esm/types/index.d.min.mts",
+        "default": "./dist/esm/index.min.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/types/index.d.min.ts",
+        "default": "./dist/commonjs/index.min.cjs"
+      }
+    },
+    "./development": {
+      "import": {
+        "types": "./dist/esm/types/index.d.mts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/types/index.d.ts",
+        "default": "./dist/commonjs/index.cjs"
+      }
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "production": [
+        "dist/commonjs/types/index.d.min.ts"
+      ],
+      "development": [
+        "dist/commonjs/types/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf build && rm -rf dist",
+    "build": "npm run clean && tsc",
+    "bundle": "npm run build && npx rollup -c ./build/rollup.config.js",
+    "prepublishOnly": "npm run bundle",
+    "test": "npm run build && node ./build/scripts/test.js"
+  },
+  "homepage": "https://github.com/CodeJamboree/action-builder#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeJamboree/action-builder.git"
+  },
+  "keywords": [
+    "redux",
+    "saga",
+    "actions",
+    "payload",
+    "fetch"
+  ],
+  "author": "Code Jamboree LLC",
+  "license": "MIT",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.7"
+  },
+  "devDependencies": {
+    "@codejamboree/js-logger": "^2.2.0",
+    "@codejamboree/js-test": "^2.5.3",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^22.5.5",
+    "rollup": "^4.22.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-license": "^3.5.2",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "tslib": "^2.7.0",
+    "typescript": "^5.6.2"
+  }
+}
